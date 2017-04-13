@@ -1,0 +1,94 @@
+<ion-view>
+	<ion-nav-title>
+  {{::product.title.rendered}}
+	</ion-nav-title>
+	<ion-nav-buttons side="right">
+		<button class="button button-icon button-clear ion-android-share-alt" ng-click="socialShare(product.title.rendered, product.link)"></button>
+	</ion-nav-buttons>
+  <ion-content>
+
+		<ion-slides slider="gallerySlider">
+		    <ion-slide-page ng-repeat="slide in product.acf.gallery"
+												image-lazy-src="{{slide.url}}"
+												image-lazy-background-image="true"
+												image-lazy-loader="{{os}}">
+				</ion-slide-page>
+		</ion-slides>
+
+		<div class="card">
+		  <div class="item item-text-wrap product-description" ng-bind-html="product.acf.description | html_filters" ng-if="product.acf.description"></div>
+
+			<div class="item product-showroom" ng-if="product.acf.showroom">
+				<p>Available in</p>
+				<h2>{{::product.acf.showroom.post_title}}</h2>
+				<img height="100px" ng-if="product.acf.brand" ng-src="{{product.acf.brand}}">
+			</div>
+
+			<div class="item product-catalog" ng-if="product.acf.catalog">
+				<p>Featured in</p>
+				<button ng-click="go_to('app.catalogs')" ng-repeat="catalog in product.acf.catalog" class="button icon-left ion-chevron-right">{{catalog.post_title}}</button>
+			</div>
+
+			<div class="item product-rating" ng-if="product.acf.rating == '0'">
+				<i class="ion-android-star-outline"></i>
+				<i class="ion-android-star-outline"></i>
+				<i class="ion-android-star-outline"></i>
+				<i class="ion-android-star-outline"></i>
+				<i class="ion-android-star-outline"></i>
+			</div>
+
+			<div class="item product-rating" ng-if="product.acf.rating == '1'">
+				<i class="ion-android-star"></i>
+				<i class="ion-android-star-outline"></i>
+				<i class="ion-android-star-outline"></i>
+				<i class="ion-android-star-outline"></i>
+				<i class="ion-android-star-outline"></i>
+			</div>
+
+
+			<div class="item product-rating" ng-if="product.acf.rating == '2'">
+				<i class="ion-android-star"></i>
+				<i class="ion-android-star"></i>
+				<i class="ion-android-star-outline"></i>
+				<i class="ion-android-star-outline"></i>
+				<i class="ion-android-star-outline"></i>
+			</div>
+
+			<div class="item product-rating" ng-if="product.acf.rating == '3'">
+				<i class="ion-android-star"></i>
+				<i class="ion-android-star"></i>
+				<i class="ion-android-star"></i>
+				<i class="ion-android-star-outline"></i>
+				<i class="ion-android-star-outline"></i>
+			</div>
+
+			<div class="item product-rating" ng-if="product.acf.rating == '4'">
+				<i class="ion-android-star"></i>
+				<i class="ion-android-star"></i>
+				<i class="ion-android-star"></i>
+				<i class="ion-android-star"></i>
+				<i class="ion-android-star-outline"></i>
+			</div>
+
+			<div class="item product-rating" ng-if="product.acf.rating == '5'">
+				<i class="ion-android-star"></i>
+				<i class="ion-android-star"></i>
+				<i class="ion-android-star"></i>
+				<i class="ion-android-star"></i>
+				<i class="ion-android-star"></i>
+			</div>
+
+			<div class="item product-like item-divider">
+				<p ng-if="!bookmarked">Add to favorites</p>
+				<p ng-if="bookmarked">Remove from favorites</p>
+				<button class="button icon button-block {{ (bookmarked) ? 'thumbsdown' : 'ion-thumbsup'}} button-positive" ng-click="bookmarkItem(product.id)">
+					{{ (bookmarked) ? ' Unlike' : ' Like'}}
+				</button>
+			</div>
+
+		</div>
+
+
+
+  </ion-content>
+</ion-view>

@@ -1,0 +1,109 @@
+<ion-view class="single_showroom">
+	<ion-nav-title ng-bind-html="showroom.title.rendered">
+
+	</ion-nav-title>
+	<ion-nav-buttons side="right">
+		<button class="button button-icon button-clear ion-android-share-alt" ng-click="socialShare(showroom.title.rendered, showroom.link)"></button>
+	</ion-nav-buttons>
+
+  <ion-content lazy-scroll>
+		<ion-refresher on-refresh="doRefresh()"></ion-refresher>
+		<div class="showroom-header"
+				 image-lazy-background-image="true"
+				 image-lazy-src="{{showroom._embedded['wp:featuredmedia'][0].source_url}}"
+				 image-lazy-loader="{{os}}">
+		</div>
+
+
+<div class="showroom-online">
+		<a class="button button-icon icon ion-android-mail" ng-href="mailto:{{showroom.acf.email}}" ng-if="showroom.acf.email"></a>
+		<a class="button button-icon icon ion-earth" ng-click="externalUrl(showroom.acf.website)" ng-if="showroom.acf.website"></a>
+		<a class="button button-icon icon ion-social-facebook" ng-click="externalUrl(showroom.acf.facebook)" ng-if="showroom.acf.facebook"></a>
+		<a class="button button-icon icon ion-social-twitter" ng-click="externalUrl(showroom.acf.twitter)" ng-if="showroom.acf.twitter"></a>
+		<a class="button button-icon icon ion-social-instagram" ng-click="externalUrl(showroom.acf.instagram)" ng-if="showroom.acf.instagram"></a>
+		<a class="button button-icon icon ion-social-pinterest" ng-click="externalUrl(showroom.acf.pinterest)" ng-if="showroom.acf.pinterest"></a>
+		<a class="button button-icon icon ion-social-linkedin" ng-click="externalUrl(showroom.acf.linkedin)" ng-if="showroom.acf.linkedin"></a>
+</div>
+
+		<div class="card showroom-description-card">
+		  <div class="item item-text-wrap" ng-if="!readmore">
+		    	{{showroom.acf.description | limitTo: 300 }}{{showroom.acf.description > 300 ? '' : '...'}}
+		  </div>
+			<div class="item item-text-wrap" ng-if="readmore">
+					{{showroom.acf.description}}
+			</div>
+			<div class="item item-divider">
+				<button class="button button-full button-positive" ng-click="readmore=!readmore" ng-show="!readmore">
+					 Read more
+				</button>
+				<button class="button button-full button-positive" ng-click="readmore=!readmore" ng-show="readmore">
+					 Read less
+				</button>
+			</div>
+		</div>
+
+		<div class="card showroom-map-card">
+			<div class="item item-divider">
+				Map
+				<a class="button button-icon icon ion-chevron-down collapseBtn" ng-click="hideMap =! hideMap" ng-show="!hideMap"></a>
+				<a class="button button-icon icon ion-chevron-up collapseBtn" ng-click="hideMap =! hideMap" ng-show="hideMap"></a>
+			</div>
+			<div class="item item-text-wrap map-content" ng-show="!hideMap">
+				<div id="showroom-map" data-tap-disabled="true"></div>
+			</div>
+		</div>
+
+		<div class="card showroom-branches-card" ng-if="showroom.acf.branches">
+			<div class="item item-divider branches-header">
+				Branches
+				<a class="button button-icon icon ion-chevron-down collapseBtn" ng-click="hideBranches =! hideBranches" ng-show="!hideBranches"></a>
+				<a class="button button-icon icon ion-chevron-up collapseBtn" ng-click="hideBranches =! hideBranches" ng-show="hideBranches"></a>
+			</div>
+			<div class="item item-text-wrap branches-content" ng-show="!hideBranches">
+				<div class="list">
+					<div class="item branch-item" ng-repeat="branch in showroom.acf.branches">
+						<div class="branch_address">
+							{{branch.branch_address}}
+							<a class="button button-icon icon ion-location" ng-href="geo:0,0?q={{branch.branch_address}} ({{::showroom.title.rendered}})"></a>
+						</div>
+						<div class="branch_phone">
+							{{branch.branch_phone}}
+							<a class="button button-icon icon ion-ios-telephone" ng-href="tel:{{branch.branch_phone}}"></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="card showroom-brands-card">
+			<div class="item item-divider">
+				Available Products
+				<a class="button button-icon icon ion-chevron-down collapseBtn" ng-click="hideProducts =! hideProducts" ng-show="!hideProducts"></a>
+				<a class="button button-icon icon ion-chevron-up collapseBtn" ng-click="hideProducts =! hideProducts" ng-show="hideProducts"></a>
+			</div>
+			<div class="item item-text-wrap map-content" ng-show="!hideProducts">
+
+			</div>
+		</div>
+
+		<div class="card showroom-brands-card" ng-if="showroom.acf.brands">
+			<div class="item item-divider">
+				Available Brands
+				<a class="button button-icon icon ion-chevron-down collapseBtn" ng-click="hideBrands =! hideBrands" ng-show="!hideBrands"></a>
+				<a class="button button-icon icon ion-chevron-up collapseBtn" ng-click="hideBrands =! hideBrands" ng-show="hideBrands"></a>
+			</div>
+			<div class="item item-text-wrap map-content" ng-show="!hideBrands">
+				<ion-slides slider="brandsSlider">
+
+				    <ion-slide-page ng-repeat="slide in showroom.acf.brands"
+														image-lazy-src="{{slide.brand_logo}}"
+														image-lazy-background-image="true"
+														image-lazy-loader="{{os}}">
+						</ion-slide-page>
+				</ion-slides>
+			</div>
+		</div>
+
+
+  </ion-content>
+</ion-view>

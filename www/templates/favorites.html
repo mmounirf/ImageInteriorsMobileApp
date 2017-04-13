@@ -1,0 +1,25 @@
+<ion-view view-title="Favorites">
+  <ion-content>
+  <ion-refresher on-refresh="doRefresh()"></ion-refresher>
+  <ion-list class="favoritesList">
+		<ion-item class="item-icon-right product-item" ng-repeat="product in products" href="#/app/products/{{product.id}}" track>
+      <div class="product-img">
+        <img image-lazy-src="{{product.acf.gallery[0].url}}" image-lazy-loader="{{os}}" />
+      </div>
+      <div class="product-text">
+  			<h2 ng-bind-html="product.title.rendered"></h2>
+  			<p ng-if="product.acf.description" ng-bind-html="product.acf.description"></p>
+      </div>
+			<i class="icon ion-chevron-right icon-accessory"></i>
+		</ion-item>
+	</ion-list>
+  
+
+	<ion-infinite-scroll
+	ng-if="moreDataExists()"
+    on-infinite="loadMore()"
+    distance="1%">
+  </ion-infinite-scroll>
+
+  </ion-content>
+</ion-view>

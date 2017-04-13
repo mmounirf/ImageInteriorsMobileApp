@@ -1,0 +1,26 @@
+<ion-modal-view class="filtersModal">
+   <ion-header-bar class="bar-balanced bar bar-header">
+     <button class = "button button-icon icon-left ion-checkmark" ng-click="applyFilters(selectedFilters)"></button>
+      <h1 class="title">Filters | {{selectedFilters.style.name}} {{selectedFilters.type.name}} {{selectedFilters.category.name}}</h1>
+      <button class = "button button-icon icon-right ion-{{os}}-close" ng-click="closeFiltersModal()"></button>
+   </ion-header-bar>
+
+   <ion-content>
+
+     <ion-list>
+
+        <div ng-repeat="filter in filters">
+          <ion-item class="item-stable" ng-click="toggleGroup(filter)" ng-class="{active: isGroupShown(filter)}">
+              <i class="icon" ng-class="isGroupShown(filter) ? 'ion-minus' : 'ion-plus'"></i>
+            &nbsp;
+            Products by {{filter.name}}
+          </ion-item>
+          <ion-list class="item-accordion" ng-repeat="item in filter.items" ng-show="isGroupShown(filter)">
+            <ion-radio ng-model="selectedFilters.style" ng-value="{{item}}" name="style" ng-if="filter.name=='Styles'">{{item.name}}</ion-radio>
+            <ion-radio ng-model="selectedFilters.type" ng-value="{{item}}" name="type" ng-if="filter.name=='Types'">{{item.name}}</ion-radio>
+            <ion-radio ng-model="selectedFilters.category" ng-value="{{item}}" name="category" ng-if="filter.name=='Categories'">{{item.name}}</ion-radio>
+          </ion-list>
+        </div>
+      </ion-list>
+   </ion-content>
+</ion-modal-view>
