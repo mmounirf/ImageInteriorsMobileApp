@@ -88,6 +88,96 @@ ImageInteriorsApp.config(function($stateProvider, $urlRouterProvider, $ionicConf
         controller: 'ShowroomCtrl'
       }
     }
+  })
+
+  .state('app.catalogs', {
+    url: "/catalogs",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/catalogs.html",
+        controller: 'CatalogsCtrl'
+      }
+    }
+  })
+
+  .state('app.catalog', {
+    url: "/catalogs/:catalogId",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/catalog.html",
+        controller: 'CatalogCtrl'
+      }
+    }
+  })
+
+  .state('app.designers', {
+    url: "/designers",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/designers.html",
+        controller: 'DesignersCtrl'
+      }
+    }
+  })
+
+  .state('app.designer', {
+    url: "/designers/:designerId",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/designer.html",
+        controller: 'DesignerCtrl'
+      }
+    }
+  })
+
+  .state('app.houses', {
+    url: "/houses",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/houses.html",
+        controller: 'HousesCtrl'
+      }
+    }
+  })
+
+  .state('app.house', {
+    url: "/houses/:houseId",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/house.html",
+        controller: 'HouseCtrl'
+      }
+    }
+  })
+
+  .state('app.articles', {
+    url: "/articles",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/articles.html",
+        controller: 'ArticlesCtrl'
+      }
+    }
+  })
+
+  .state('app.article', {
+    url: "/articles/:articleId",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/article.html",
+        controller: 'ArticleCtrl'
+      }
+    }
+  })
+
+  .state('app.envouges', {
+    url: "/envouges",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/envouges.html",
+        controller: 'EnvougesCtrl'
+      }
+    }
   });
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/intro');

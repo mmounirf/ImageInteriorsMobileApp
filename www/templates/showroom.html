@@ -75,17 +75,6 @@
 			</div>
 		</div>
 
-		<div class="card showroom-brands-card">
-			<div class="item item-divider">
-				Available Products
-				<a class="button button-icon icon ion-chevron-down collapseBtn" ng-click="hideProducts =! hideProducts" ng-show="!hideProducts"></a>
-				<a class="button button-icon icon ion-chevron-up collapseBtn" ng-click="hideProducts =! hideProducts" ng-show="hideProducts"></a>
-			</div>
-			<div class="item item-text-wrap map-content" ng-show="!hideProducts">
-
-			</div>
-		</div>
-
 		<div class="card showroom-brands-card" ng-if="showroom.acf.brands">
 			<div class="item item-divider">
 				Available Brands
@@ -93,9 +82,8 @@
 				<a class="button button-icon icon ion-chevron-up collapseBtn" ng-click="hideBrands =! hideBrands" ng-show="hideBrands"></a>
 			</div>
 			<div class="item item-text-wrap map-content" ng-show="!hideBrands">
-				<ion-slides slider="brandsSlider">
-
-				    <ion-slide-page ng-repeat="slide in showroom.acf.brands"
+				<ion-slides slider="brandsSlider" class="brandsSlider">
+						<ion-slide-page ng-repeat="slide in showroom.acf.brands"
 														image-lazy-src="{{slide.brand_logo}}"
 														image-lazy-background-image="true"
 														image-lazy-loader="{{os}}">
@@ -104,6 +92,26 @@
 			</div>
 		</div>
 
+		<div class="card showroom-brands-card">
+			<div class="item item-divider">
+				Available Products
+				<a class="button button-icon icon ion-chevron-down collapseBtn" ng-click="hideProducts =! hideProducts" ng-show="!hideProducts"></a>
+				<a class="button button-icon icon ion-chevron-up collapseBtn" ng-click="hideProducts =! hideProducts" ng-show="hideProducts"></a>
+			</div>
+			<div class="item item-text-wrap relatedProducts-content" ng-show="!hideProducts">
+				<ion-list>
+					<ion-item class="item-icon-right product-item" ng-repeat="relatedProduct in relatedProducts" href="#/app/products/{{relatedProduct.id}}">
+						<div class="product-img">
+							<img image-lazy-src="{{relatedProduct.acf.gallery[0].url}}" image-lazy-loader="{{os}}" />
+						</div>
+						<div class="product-text">
+							<h2 ng-bind-html="relatedProduct.title.rendered"></h2>
+						</div>
+						<i class="icon ion-chevron-right icon-accessory"></i>
+					</ion-item>
+				</ion-list>
+			</div>
+		</div>
 
   </ion-content>
 </ion-view>

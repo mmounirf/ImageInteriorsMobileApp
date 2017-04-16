@@ -176,7 +176,8 @@
 	width: 100%;
 }
 
-.swiper-slide {
+
+.gallerySlider .swiper-slide {
 		height: 300px;
     background-size: cover!important;
     background-position: center center!important;
@@ -394,4 +395,14 @@ justify-content: center;
 .showroom-brands-card .image-loader-container{
   left:0;
   top:0;
+}
+
+.relatedProducts-content{
+  padding: 0;
+}
+
+.brandsSlider .swiper-slide {
+    background-size: contain!important;
+    background-position: center center;
+    background-repeat: no-repeat;
 }
