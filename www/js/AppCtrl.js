@@ -1,4 +1,4 @@
-ImageInteriorsApp.controller('AppCtrl', function($scope, $ionicModal, $timeout, $sce, DataLoader, $rootScope, $log, $state) {
+ImageInteriorsApp.controller('AppCtrl', function($scope, AccountService, $ionicModal, $timeout, $sce, DataLoader, $rootScope, $log, $state, $cordovaInAppBrowser, $ionicLoading, $http) {
   $rootScope.url = 'http://image-interiors.com/wp-json/wp/v2/';
   if(ionic.Platform.isIOS()){
     $rootScope.os = 'ios';
@@ -7,5 +7,24 @@ ImageInteriorsApp.controller('AppCtrl', function($scope, $ionicModal, $timeout, 
   }
   $rootScope.go_to = function(page_name){
     $state.go(page_name)
+  }
+
+  var inAppBrowserOptions = {
+    location: 'yes',
+    toolbar: 'yes'
+  };
+
+  $rootScope.openUrl = function(url){
+    $cordovaInAppBrowser.open(url, '_system', inAppBrowserOptions);
+  }
+
+  $rootScope.userAccount = AccountService.get('userAccount');
+  $scope.logout = function(){
+    $ionicLoading.show();
+    AccountService.destroy('userAccount');
+    AccountService.destroy('userInfo');
+    $http.defaults.headers.common.Authorization = '';
+    $state.go('app.signin')
+    $ionicLoading.hide();
   }
 })

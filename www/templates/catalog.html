@@ -1,7 +1,30 @@
-<ion-view>
+<ion-view class="catalog-view">
 	<ion-nav-title>
+  {{::catalog.title.rendered}}
 	</ion-nav-title>
-  <ion-content>
-			CATALOG
+	<ion-nav-buttons side="right">
+		<button class="button button-icon button-clear ion-android-share-alt" ng-click="socialShare(catalog.title.rendered, catalog.link)"></button>
+	</ion-nav-buttons>
+
+  <ion-content lazy-scroll>
+		<ion-refresher on-refresh="doRefresh()"></ion-refresher>
+		<ion-slides slider="catalogGallerySlider" class="catalogGallerySlider">
+		    <ion-slide-page ng-repeat="slide in catalog.acf.gallery"
+												image-lazy-src="{{slide.url}}"
+												image-lazy-background-image="true"
+												image-lazy-loader="{{os}}">
+				</ion-slide-page>
+		</ion-slides>
+		<div class="card catalog-content">
+			<div class="item item-text-wrap catalog-description" ng-bind-html="catalog.acf.description | html_filters" ng-if="catalog.acf.description">
+
+			</div>
+
+			<div class="catalog-action-btns">
+				<button class="button icon-left ion-{{os}}-download button-balanced download-btn" ng-click="openUrl(catalog.acf.catalog_sample)">Download Sample</button>
+				<button class="button icon-left ion-ios-book button-balanced" ng-click="requestHardCopyModal.show()">Request Hard Copy</button>
+			</div>
+		</div>
   </ion-content>
+
 </ion-view>

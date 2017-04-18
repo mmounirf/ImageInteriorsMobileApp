@@ -6,7 +6,7 @@
 		<button class="button button-icon button-clear ion-android-share-alt" ng-click="socialShare(product.title.rendered, product.link)"></button>
 	</ion-nav-buttons>
   <ion-content>
-
+		<ion-refresher on-refresh="doRefresh()"></ion-refresher>
 		<ion-slides slider="gallerySlider" class="gallerySlider">
 		    <ion-slide-page ng-repeat="slide in product.acf.gallery"
 												image-lazy-src="{{slide.url}}"
@@ -81,7 +81,7 @@
 			<div class="item product-like item-divider">
 				<p ng-if="!bookmarked">Add to favorites</p>
 				<p ng-if="bookmarked">Remove from favorites</p>
-				<button class="button icon button-block {{ (bookmarked) ? 'thumbsdown' : 'ion-thumbsup'}} button-positive" ng-click="bookmarkItem(product.id)">
+				<button class="button icon button-block {{ (bookmarked) ? 'thumbsdown' : 'ion-thumbsup'}} button-balanced" ng-click="bookmarkItem(product.id)">
 					{{ (bookmarked) ? ' Unlike' : ' Like'}}
 				</button>
 			</div>

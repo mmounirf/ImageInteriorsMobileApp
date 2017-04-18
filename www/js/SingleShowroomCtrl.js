@@ -130,10 +130,6 @@ $scope.socialShare = function(showroom_title, showroom_link){
   });
 }
 
-  $scope.externalUrl = function(url){
-    navigator.app.loadUrl(url, {openExternal : true});
-  }
-
   $scope.doRefresh = function() {
     $timeout( function() {
       $scope.loadShowroom();

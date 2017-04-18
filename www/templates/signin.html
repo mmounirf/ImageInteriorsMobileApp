@@ -1,0 +1,28 @@
+<ion-view view-title="Sign In" hide-back-button="true" hide-nav-bar="true" class="signin-page">
+  <ion-content scroll="false">
+    <div class="signin-logo"></div>
+
+    <div class="card">
+      <form name="signinForm">
+      <label class="item item-input">
+        <i class="icon ion-person"></i>
+        <span class="input-label">Username</span>
+        <input ng-model="user.username" name="username" type="text" placeholder="Your username or email" required>
+      </label>
+      <label class="item item-input">
+        <i class="icon ion-android-lock"></i>
+        <span class="input-label">Password</span>
+        <input ng-model="user.password" name="password" type="password" placeholder="Your password" required>
+      </label>
+    </div>
+
+    <button class="button button-large button-balanced button-balanced signin-btn" ng-click="signin(user)"  ng-disabled="signinForm.$invalid">
+      Sign In
+    </button>
+    <p class="signup-msg">Don't have an account?</p>
+    <button class="button button-large button-balanced signup-btn" ng-click="go_to('app.signup')">
+      Sign Up
+    </button>
+  </form>
+  </ion-content>
+</ion-view>

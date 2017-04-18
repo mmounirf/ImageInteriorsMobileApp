@@ -1,0 +1,28 @@
+<ion-view view-title="Sign Up" hide-back-button="true" hide-nav-bar="true" class="signup-page">
+  <a class="button icon-left ion-chevron-left button-clear button-light back-btn" ng-href="#/app/signin">Sign In</a>
+  <ion-content scroll="false">
+    <div class="signin-logo"></div>
+    <div class="card">
+      <form name="registerForm" novalidate>
+      <label class="item item-input">
+        <i class="icon ion-person"></i>
+        <span class="input-label">Username</span>
+        <input ng-model="user.username" name="username" type="text" placeholder="Your username" required>
+      </label>
+      <label class="item item-input">
+        <i class="icon ion-android-lock"></i>
+        <span class="input-label">Email</span>
+        <input ng-model="user.email" name="email" type="email" placeholder="Your email" required>
+      </label>
+      <label class="item item-input">
+        <i class="icon ion-android-lock"></i>
+        <span class="input-label">Password</span>
+        <input ng-model="user.password" name="password" type="password" placeholder="Your password" required>
+      </label>
+    </div>
+    <button class="button button-large button-balanced button-balanced signup-btn" ng-click="register(user)" ng-disabled="registerForm.$invalid">
+      Complete Registeration
+    </button>
+  </form>
+  </ion-content>
+</ion-view>

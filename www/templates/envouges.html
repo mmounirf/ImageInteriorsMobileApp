@@ -1,7 +1,55 @@
-<ion-view>
-	<ion-nav-title>
-	</ion-nav-title>
-  <ion-content>
-			ENVOUGES
+<ion-view view-title="Envouges">
+  <ion-nav-buttons side="right">
+    <button class="button button-icon ion-funnel" ng-click="filtersModal.show()"></button>
+  </ion-nav-buttons>
+  <ion-content lazy-scroll>
+
+    <div class="bar bar-header item-input-inset search-bar">
+        <i class="icon ion-{{os}}-search placeholder-icon"></i>
+        <input type="text" class="search-input" placeholder=" Search" ng-model="searchEnvouges" />
+        <button ng-show="searchEnvouges.length" class="button button-icon ion-{{os}}-close input-button" ng-click="searchEnvouges = ''">
+    </div>
+    <div class="filters" ng-if="selectedFilters.style || selectedFilters.type || selectedFilters.category">
+      <p>Filters </p>
+
+      <div class="chip" ng-if="selectedFilters.style" ng-click="removeFilter('style')">
+        {{selectedFilters.style.name}}
+        <span class="closebtn"><i class="icon ion-android-close"></i></span>
+      </div>
+
+      <div class="chip" ng-if="selectedFilters.type" ng-click="removeFilter('type')">
+        {{selectedFilters.type.name}}
+        <span class="closebtn"><i class="icon ion-android-close"></i></span>
+      </div>
+
+      <div class="chip" ng-if="selectedFilters.category" ng-click="removeFilter('category')">
+        {{selectedFilters.category.name}}
+        <span class="closebtn"><i class="icon ion-android-close"></i></span>
+      </div>
+
+    </div>
+  <ion-refresher on-refresh="doRefresh()"></ion-refresher>
+
+	<ion-list>
+		<ion-item class="item-icon-right product-item" ng-repeat="envouge in envouges | filter:searchEnvouges" href="#/app/products/{{envouge.id}}" track>
+      <div class="product-img">
+        <img image-lazy-src="{{envouge.acf.gallery[0].url}}" image-lazy-loader="{{os}}" />
+      </div>
+      <div class="product-text">
+  			<h2 ng-bind-html="envouge.title.rendered"></h2>
+  			<p ng-if="envouge.acf.description" ng-bind-html="envouge.acf.description"></p>
+      </div>
+			<i class="icon ion-chevron-right icon-accessory"></i>
+		</ion-item>
+	</ion-list>
+
+	<ion-infinite-scroll
+	ng-if="moreDataExists()"
+    on-infinite="loadMore()"
+    distance="1%"
+    immediate-check="true">
+  </ion-infinite-scroll>
+  <p class="lastPageNote" ng-if=lastPage>Displaying {{envouges.length}} envouges</p>
   </ion-content>
+
 </ion-view>

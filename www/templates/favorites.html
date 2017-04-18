@@ -2,18 +2,18 @@
   <ion-content>
   <ion-refresher on-refresh="doRefresh()"></ion-refresher>
   <ion-list class="favoritesList">
-		<ion-item class="item-icon-right product-item" ng-repeat="product in products" href="#/app/products/{{product.id}}" track>
+		<ion-item class="item-icon-right product-item" ng-repeat="favProduct in favProducts" href="#/app/products/{{favProduct.id}}" track>
       <div class="product-img">
-        <img image-lazy-src="{{product.acf.gallery[0].url}}" image-lazy-loader="{{os}}" />
+        <img image-lazy-src="{{favProduct.acf.gallery[0].url}}" image-lazy-loader="{{os}}" />
       </div>
       <div class="product-text">
-  			<h2 ng-bind-html="product.title.rendered"></h2>
-  			<p ng-if="product.acf.description" ng-bind-html="product.acf.description"></p>
+  			<h2 ng-bind-html="favProduct.title.rendered"></h2>
+  			<p ng-if="favProduct.acf.description" ng-bind-html="favProduct.acf.description"></p>
       </div>
 			<i class="icon ion-chevron-right icon-accessory"></i>
 		</ion-item>
 	</ion-list>
-  
+
 
 	<ion-infinite-scroll
 	ng-if="moreDataExists()"

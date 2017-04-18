@@ -39,12 +39,12 @@ ImageInteriorsApp.config(function($stateProvider, $urlRouterProvider, $ionicConf
     controller: 'AppCtrl'
   })
 
-  .state('app.intro', {
-    url: "/intro",
+  .state('app.signin', {
+    url: "/signin",
     views: {
       'menuContent': {
-        templateUrl: "templates/intro.html",
-        controller: 'IntroCtrl'
+        templateUrl: "templates/signin.html",
+        controller: 'SigninCtrl'
       }
     }
   })
@@ -170,6 +170,26 @@ ImageInteriorsApp.config(function($stateProvider, $urlRouterProvider, $ionicConf
     }
   })
 
+  .state('app.favorites', {
+    url: "/favorites",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/favorites.html",
+        controller: 'FavoritesCtrl'
+      }
+    }
+  })
+
+  .state('app.signup', {
+    url: "/signup",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/signup.html",
+        controller: 'SignupCtrl'
+      }
+    }
+  })
+
   .state('app.envouges', {
     url: "/envouges",
     views: {
@@ -180,5 +200,5 @@ ImageInteriorsApp.config(function($stateProvider, $urlRouterProvider, $ionicConf
     }
   });
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/intro');
+  $urlRouterProvider.otherwise('/app/signin');
 });

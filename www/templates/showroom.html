@@ -13,16 +13,16 @@
 				 image-lazy-src="{{showroom._embedded['wp:featuredmedia'][0].source_url}}"
 				 image-lazy-loader="{{os}}">
 		</div>
-
+		
 
 <div class="showroom-online">
 		<a class="button button-icon icon ion-android-mail" ng-href="mailto:{{showroom.acf.email}}" ng-if="showroom.acf.email"></a>
-		<a class="button button-icon icon ion-earth" ng-click="externalUrl(showroom.acf.website)" ng-if="showroom.acf.website"></a>
-		<a class="button button-icon icon ion-social-facebook" ng-click="externalUrl(showroom.acf.facebook)" ng-if="showroom.acf.facebook"></a>
-		<a class="button button-icon icon ion-social-twitter" ng-click="externalUrl(showroom.acf.twitter)" ng-if="showroom.acf.twitter"></a>
-		<a class="button button-icon icon ion-social-instagram" ng-click="externalUrl(showroom.acf.instagram)" ng-if="showroom.acf.instagram"></a>
-		<a class="button button-icon icon ion-social-pinterest" ng-click="externalUrl(showroom.acf.pinterest)" ng-if="showroom.acf.pinterest"></a>
-		<a class="button button-icon icon ion-social-linkedin" ng-click="externalUrl(showroom.acf.linkedin)" ng-if="showroom.acf.linkedin"></a>
+		<a class="button button-icon icon ion-earth" ng-click="openUrl(showroom.acf.website)" ng-if="showroom.acf.website"></a>
+		<a class="button button-icon icon ion-social-facebook" ng-click="openUrl(showroom.acf.facebook)" ng-if="showroom.acf.facebook"></a>
+		<a class="button button-icon icon ion-social-twitter" ng-click="openUrl(showroom.acf.twitter)" ng-if="showroom.acf.twitter"></a>
+		<a class="button button-icon icon ion-social-instagram" ng-click="openUrl(showroom.acf.instagram)" ng-if="showroom.acf.instagram"></a>
+		<a class="button button-icon icon ion-social-pinterest" ng-click="openUrl(showroom.acf.pinterest)" ng-if="showroom.acf.pinterest"></a>
+		<a class="button button-icon icon ion-social-linkedin" ng-click="openUrl(showroom.acf.linkedin)" ng-if="showroom.acf.linkedin"></a>
 </div>
 
 		<div class="card showroom-description-card">
@@ -33,10 +33,10 @@
 					{{showroom.acf.description}}
 			</div>
 			<div class="item item-divider">
-				<button class="button button-full button-positive" ng-click="readmore=!readmore" ng-show="!readmore">
+				<button class="button button-full button-balanced" ng-click="readmore=!readmore" ng-show="!readmore">
 					 Read more
 				</button>
-				<button class="button button-full button-positive" ng-click="readmore=!readmore" ng-show="readmore">
+				<button class="button button-full button-balanced" ng-click="readmore=!readmore" ng-show="readmore">
 					 Read less
 				</button>
 			</div>

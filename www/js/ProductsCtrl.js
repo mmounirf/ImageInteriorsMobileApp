@@ -4,6 +4,7 @@ ImageInteriorsApp.controller('ProductsCtrl', function( $scope, $http, DataLoader
   var productsTypesApi = $rootScope.url + 'product_type?per_page=100';
   var productsCategoriesApi = $rootScope.url + 'product_category?per_page=100';
   var productsFilterApi = productsApi + '?per_page=100';
+  var filtersApi;
 
   $scope.filters = [{name: "Styles"}, {name: "Types"}, {name: "Categories"}];
   $scope.selectedFilters = {};
@@ -27,7 +28,7 @@ ImageInteriorsApp.controller('ProductsCtrl', function( $scope, $http, DataLoader
 
   $scope.removeFilter = function(filter){
     delete $scope.selectedFilters[filter];
-    $scope.loadProducts();
+    $scope.applyFilters($scope.selectedFilters);
   }
 
   $scope.moreItems = false;
@@ -39,11 +40,11 @@ ImageInteriorsApp.controller('ProductsCtrl', function( $scope, $http, DataLoader
     if(!$scope.selectedFilters.style && !$scope.selectedFilters.type && !$scope.selectedFilters.category){
       var api = productsApi;
     }else{
-      var api = productsFilterApi;
+      var api = filtersApi;
     }
 
     // Get all of our products
-    DataLoader.get( api ).then(function(response) {
+    DataLoader.get(api).then(function(response) {
       $scope.products = response.data;
       $scope.moreItems = true;
       $log.log(api, response.data);
@@ -77,26 +78,22 @@ ImageInteriorsApp.controller('ProductsCtrl', function( $scope, $http, DataLoader
     $scope.filtersModal.hide();
   }
 
-    $scope.applyFilters = function(filtersObj){
-      $scope.filtersModal.hide();
-      $ionicLoading.show({
-        noBackdrop: true
-      });
+  $scope.applyFilters = function(filtersObj){
+    $scope.filtersModal.hide();
+    $ionicLoading.show({
+      noBackdrop: true
+    });
 
-
-      if(filtersObj.style){
-        productsFilterApi += '&product_style=' + filtersObj.style.id;
-      }
-      if(filtersObj.type){
-        productsFilterApi += '&product_type=' + filtersObj.type.id;
-      }
-      if(filtersObj.category){
-        productsFilterApi += '&product_category=' + filtersObj.category.id;
+      filtersApi = productsFilterApi.substr('&');
+      for (var key in $scope.selectedFilters) {
+        filtersApi += "&product_" + key + "=" + $scope.selectedFilters[key].id;
       }
 
-      console.log(productsFilterApi)
+
+
+      console.log(filtersApi)
       // Get filtered products
-      DataLoader.get( productsFilterApi ).then(function(response) {
+      DataLoader.get(filtersApi).then(function(response) {
         $scope.products = response.data;
         $scope.moreItems = true;
         $ionicLoading.hide();
@@ -118,10 +115,10 @@ ImageInteriorsApp.controller('ProductsCtrl', function( $scope, $http, DataLoader
     if(!$scope.selectedFilters.style && !$scope.selectedFilters.type && !$scope.selectedFilters.category){
       var api = productsApi;
     }else{
-      var api = productsFilterApi;
+      var api = filtersApi;
     }
 
-
+    console.log(api)
     var pg = paged++;
     $log.log('loadMore ' + pg );
     $timeout(function() {

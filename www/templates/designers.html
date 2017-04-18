@@ -1,7 +1,35 @@
-<ion-view>
-	<ion-nav-title>
-	</ion-nav-title>
-  <ion-content>
-			DESIGNERS
+<ion-view view-title="Designers">
+  <ion-content lazy-scroll>
+    <div class="bar bar-header item-input-inset search-bar">
+        <i class="icon ion-{{os}}-search placeholder-icon"></i>
+        <input type="text" class="search-input" placeholder=" Search" ng-model="searchDesigners" />
+        <button ng-show="searchDesigners.length" class="button button-icon ion-{{os}}-close input-button" ng-click="searchDesigners = ''">
+    </div>
+
+  <ion-refresher on-refresh="doRefresh()"></ion-refresher>
+	<ion-list>
+		<ion-item class="item-icon-right designer-item" ng-repeat="designer in designers | filter:searchDesigners" href="#/app/designers/{{designer.id}}" track>
+			<div
+        class="designer-img"
+        image-lazy-background-image="true"
+        image-lazy-src="{{designer._embedded['wp:featuredmedia'][0].source_url}}"
+        image-lazy-loader="{{os}}"
+      ></div>
+
+      <div class="designer-text">
+  			<h2 ng-bind-html="designer.title.rendered"></h2>
+      </div>
+			<i class="icon ion-chevron-right icon-accessory"></i>
+		</ion-item>
+	</ion-list>
+
+	<ion-infinite-scroll
+	  ng-if="moreDataExists()"
+    on-infinite="loadMore()"
+    distance="1%"
+    immediate-check="true">
+  </ion-infinite-scroll>
+  <p class="lastPageNote" ng-if=lastPage>Displaying {{designers.length}} designers</p>
   </ion-content>
+
 </ion-view>

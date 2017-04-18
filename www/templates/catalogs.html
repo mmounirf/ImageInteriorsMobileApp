@@ -1,7 +1,32 @@
-<ion-view>
-	<ion-nav-title>
-	</ion-nav-title>
-  <ion-content>
-			CATALOGS
+<ion-view view-title="Catalogs">
+  <ion-content lazy-scroll>
+    <div class="bar bar-header item-input-inset search-bar">
+        <i class="icon ion-{{os}}-search placeholder-icon"></i>
+        <input type="text" class="search-input" placeholder=" Search" ng-model="searchCatalogs" />
+        <button ng-show="searchCatalogs.length" class="button button-icon ion-{{os}}-close input-button" ng-click="searchCatalogs = ''">
+    </div>
+  <ion-refresher on-refresh="doRefresh()"></ion-refresher>
+	<ion-list>
+		<div class="list card" ng-repeat="catalog in catalogs | filter:searchCatalogs" track>
+		  <div class="item item-image">
+		    <img image-lazy-src="{{catalog._embedded['wp:featuredmedia'][0].source_url}}" image-lazy-loader="{{os}}" />
+		  </div>
+		  <a class="item item-icon-right assertive" href="#/app/catalogs/{{catalog.id}}">
+				<h2 ng-bind-html="catalog.title.rendered"></h2>
+				<p ng-if="catalog.acf.description" ng-bind-html="catalog.acf.description"></p>
+				<i class="icon ion-chevron-right icon-accessory"></i>
+		  </a>
+
+		</div>
+	</ion-list>
+
+	<ion-infinite-scroll
+	ng-if="moreDataExists()"
+    on-infinite="loadMore()"
+    distance="1%"
+    immediate-check="true">
+  </ion-infinite-scroll>
+  <p class="lastPageNote" ng-if=lastPage>Displaying {{catalogs.length}} catalogs</p>
   </ion-content>
+
 </ion-view>

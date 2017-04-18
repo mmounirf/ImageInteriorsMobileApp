@@ -1,9 +1,15 @@
 # Image Interiors Mobile App
 
 # Progress
-  - Products and product details page [100% COMPLETED].
-  - Showrooms and showroom details page [100% COMPLETED].
+  - Products		[100% COMPLETED].
+  - Showrooms		[100% COMPLETED].
+  - Catalogs		[99% COMPLETED].
+  - Designers		[100% COMPLETED].
+  - Houses			[0% COMPLETED].
+  - Articles		[100% COMPLETED].
+  - Envouges		[100% COMPLETED].
+  - Favorites		[100% COMPLETED].
 
 # Todo
-  - Launch social links in their corresponding native apps.
+  - Request hard copy from catalog, request form
   - Change Google Maps API Key at production.

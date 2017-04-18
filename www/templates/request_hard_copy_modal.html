@@ -1,0 +1,30 @@
+<ion-modal-view class="requestHardCopyModal">
+   <ion-header-bar class="bar-balanced bar bar-header">
+      <h1 class="title">Request {{catalog.title.rendered}} </h1>
+      <button class = "button button-icon icon-right ion-{{os}}-close" ng-click="requestHardCopyModal.hide()"></button>
+   </ion-header-bar>
+
+   <ion-content>
+     <div class="card">
+
+        <div class="list list-inset">
+          <label class="item item-input">
+            <i class="icon ion-{{os}}-person placeholder-icon" name="userName" ng-model="user.name"></i>
+            <input type="text" placeholder="Name">
+          </label>
+          <label class="item item-input">
+            <i class="icon ion-ios-telephone placeholder-icon" name="userPhone" ng-model="user.phone"></i>
+            <input type="text" placeholder="Phone">
+          </label>
+          <label class="item item-input">
+            <i class="icon ion-location placeholder-icon"></i>
+            <input type="text" placeholder="Address" name="userAddress" ng-model="user.address">
+          </label>
+          <button class="button button-full button-balanced" ng-click="sendRequest(catalog.title.rendered, user)">
+            Send Request
+          </button>
+        </div>
+
+     </div>
+   </ion-content>
+</ion-modal-view>

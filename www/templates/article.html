@@ -1,7 +1,21 @@
-<ion-view>
+<ion-view class="article-view">
 	<ion-nav-title>
+  {{::article.title.rendered}}
 	</ion-nav-title>
-  <ion-content>
-			ARTICLE
+	<ion-nav-buttons side="right">
+		<button class="button button-icon button-clear ion-android-share-alt" ng-click="socialShare(article.title.rendered, article.link)"></button>
+	</ion-nav-buttons>
+
+  <ion-content lazy-scroll>
+		<ion-refresher on-refresh="doRefresh()"></ion-refresher>
+		<ion-slides slider="catalogGallerySlider" class="catalogGallerySlider">
+			<ion-slide-page ng-repeat="slide in article.acf.gallery"
+											style="background:url({{slide.url}})">
+			</ion-slide-page>
+		</ion-slides>
+		<div class="card">
+			<p class="item item-text-wrap article-content" ng-bind-html="article.acf.description"></p>
+		</div>
   </ion-content>
+
 </ion-view>

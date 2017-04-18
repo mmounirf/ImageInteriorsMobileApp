@@ -17,10 +17,6 @@
     </ion-header-bar>
     <ion-content>
       <ion-list>
-        <ion-item class="item item-icon-left" nav-clear menu-close href="#/app/intro">
-          <i class="icon ion-ios-person-outline"></i>
-          Intro
-        </ion-item>
         <ion-item class="item item-icon-left" nav-clear menu-close href="#/app/products">
           <i class="icon ion-ios-list-outline"></i>
           Products
@@ -48,6 +44,14 @@
         <ion-item class="item item-icon-left" nav-clear menu-close href="#/app/envouges">
           <i class="icon ion-ios-flag-outline"></i>
           Envouges
+        </ion-item>
+        <ion-item class="item item-icon-left" nav-clear menu-close href="#/app/favorites">
+          <i class="icon ion-ios-star-outline"></i>
+          Favorites
+        </ion-item>
+        <ion-item class="item item-icon-left" nav-clear menu-close ng-click="logout()">
+          <i class="icon ion-ios-undo-outline"></i>
+          Logout {{userAccount.user_nicename}}
         </ion-item>
       </ion-list>
     </ion-content>

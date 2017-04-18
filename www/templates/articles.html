@@ -1,7 +1,38 @@
-<ion-view>
-	<ion-nav-title>
-	</ion-nav-title>
-  <ion-content>
-			ARTICLES
+<ion-view view-title="Articles">
+  <ion-content lazy-scroll>
+    <div class="bar bar-header item-input-inset search-bar">
+        <i class="icon ion-{{os}}-search placeholder-icon"></i>
+        <input type="text" class="search-input" placeholder=" Search" ng-model="searchArticles" />
+        <button ng-show="searchArticles.length" class="button button-icon ion-{{os}}-close input-button" ng-click="searchArticles = ''">
+    </div>
+  <ion-refresher on-refresh="doRefresh()"></ion-refresher>
+	<ion-list>
+			<div class="list card article-card" ng-repeat="article in articles | filter:searchArticles" track>
+				<a class="item assertive article-link" href="#/app/articles/{{article.id}}">
+				<div
+					class="article-img"
+					image-lazy-background-image="true"
+					image-lazy-src="{{article._embedded['wp:featuredmedia'][0].source_url}}"
+					image-lazy-loader="{{os}}"
+				>
+				</div>
+				  <div class="item item-body">
+						<h2 ng-bind-html="article.title.rendered"></h2>
+				    <p class="article-excerpt" ng-bind-html="article.acf.description"></p>
+				  </div>
+				</a>
+			</div>
+
+	</ion-list>
+
+	<ion-infinite-scroll
+	ng-if="moreDataExists()"
+    on-infinite="loadMore()"
+    distance="1%"
+    immediate-check="true">
+  </ion-infinite-scroll>
+
+  <p class="lastPageNote" ng-if=lastPage>Displaying {{articles.length}} articles</p>
   </ion-content>
+
 </ion-view>

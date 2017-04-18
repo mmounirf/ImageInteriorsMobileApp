@@ -41,15 +41,20 @@ ImageInteriorsApp.controller('ProductCtrl', function($scope, $stateParams, DataL
     }
   }
 
+  $scope.doRefresh = function() {
+    $timeout( function() {
+      $scope.loadProduct();
+      $scope.$broadcast('scroll.refreshComplete');
+    }, 1000);
+  };
+
 $scope.socialShare = function(product_title, product_link){
   var subject = "Awesome Product"
   var message = "Check " + product_title + ", I just saw in Image Interiors catalog."
   $cordovaSocialSharing
   .share(message, subject, null, product_link) // Share via native share sheet
   .then(function(result) {
-
   }, function(err) {
-
   });
 }
 })
