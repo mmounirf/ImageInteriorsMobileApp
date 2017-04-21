@@ -1,4 +1,4 @@
-ImageInteriorsApp.controller('ArticleCtrl', function($scope, $ionicLoading, $timeout, DataLoader, $rootScope, $log, $stateParams, CacheFactory, $ionicModal) {
+ImageInteriorsApp.controller('ArticleCtrl', function($scope, $ionicLoading, $timeout, DataLoader, $rootScope, $log, $stateParams, CacheFactory, $ionicModal, $cordovaSocialSharing) {
   if (!CacheFactory.get('ArticleCache')) {
     CacheFactory.createCache('ArticleCache');
   }

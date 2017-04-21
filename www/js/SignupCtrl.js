@@ -4,7 +4,9 @@ ImageInteriorsApp.controller('SignupCtrl', function($scope, $ionicLoading, $root
     disableBack: true
   });
   $ionicSideMenuDelegate.canDragContent(false);
-
+  $scope.togglePassword = function(){
+    $scope.showPassword = !$scope.showPassword;
+  }
   var registerationApi = 'https://image-interiors.com/api/';
   $scope.register = function(user) {
 

@@ -19,6 +19,7 @@ ImageInteriorsApp.directive('lazyScroll', ['$rootScope',
         };
 }])
 
+
 ImageInteriorsApp.directive('imageLazySrc', ['$document', '$timeout', '$ionicScrollDelegate', '$compile',
     function ($document, $timeout, $ionicScrollDelegate, $compile) {
         return {

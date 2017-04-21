@@ -20,13 +20,15 @@
 
 			<div class="item product-showroom" ng-if="product.acf.showroom">
 				<p>Available in</p>
-				<h2>{{::product.acf.showroom.post_title}}</h2>
-				<img height="100px" ng-if="product.acf.brand" ng-src="{{product.acf.brand}}">
+
+				<button ng-click="go_to_showroom(product.acf.showroom.ID)" class="button icon-left ion-chevron-right">{{product.acf.showroom.post_title}}</button>
+
+				<img height="100px" class="product-brand" ng-if="product.acf.showroom" ng-src="{{product.acf.brand}}">
 			</div>
 
 			<div class="item product-catalog" ng-if="product.acf.catalog">
 				<p>Featured in</p>
-				<button ng-click="go_to('app.catalogs')" ng-repeat="catalog in product.acf.catalog" class="button icon-left ion-chevron-right">{{catalog.post_title}}</button>
+				<button ng-repeat="catalog in product.acf.catalog" ng-click="go_to_catalog(catalog.ID)" class="button icon-left ion-chevron-right">{{catalog.post_title}}</button>
 			</div>
 
 			<div class="item product-rating" ng-if="product.acf.rating == '0'">

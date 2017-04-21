@@ -8,11 +8,14 @@
         <span class="input-label">Username</span>
         <input ng-model="user.username" name="username" type="text" placeholder="Your username or email" required>
       </label>
+      <div class="password-input-wrapper">
       <label class="item item-input">
         <i class="icon ion-android-lock"></i>
         <span class="input-label">Password</span>
-        <input ng-model="user.password" name="password" type="password" placeholder="Your password" required>
+        <input ng-model="user.password" name="password" type="{{ showPassword ? 'text' : 'password' }}"   placeholder="Your password" required>
       </label>
+      <button class="button button-clear btn-show-password" ng-click="togglePassword()" clear item-right><i class="ion-eye{{ showPassword ? '-disabled' : '' }}"></i></button>
+    </div>
     </div>
 
     <div class="form-actions">

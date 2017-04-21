@@ -1,4 +1,12 @@
-ImageInteriorsApp.controller('ProductCtrl', function($scope, $stateParams, DataLoader, $ionicLoading, $rootScope, $sce, CacheFactory, $log, Bookmark, $timeout, $cordovaSocialSharing) {
+ImageInteriorsApp.controller('ProductCtrl', function($scope, $stateParams, $state, DataLoader, $ionicLoading, $rootScope, $sce, CacheFactory, $log, Bookmark, $timeout, $cordovaSocialSharing) {
+
+  $scope.go_to_catalog = function(id){
+    $state.go("app.catalog", {"catalogId": id});
+  }
+
+  $scope.go_to_showroom = function(id){
+    $state.go("app.showroom", {"showroomId": id});
+  }
 
 
   if (!CacheFactory.get('ProductCache')) {

@@ -10,6 +10,9 @@ ImageInteriorsApp.controller('SigninCtrl', function($scope, $ionicLoading, $root
   });
   $ionicSideMenuDelegate.canDragContent(false);
 
+  $scope.togglePassword = function(){
+    $scope.showPassword = !$scope.showPassword;
+  }
 
   $scope.signin = function(user){
     $ionicLoading.show({
