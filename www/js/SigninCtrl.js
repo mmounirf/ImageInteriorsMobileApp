@@ -40,10 +40,18 @@ ImageInteriorsApp.controller('SigninCtrl', function($scope, $ionicLoading, $root
       })
 
       .catch( function(error) {
-        var loginFailedAlert = $ionicPopup.alert({
-          title: 'Failed to signin',
-          template: 'Please check your username and password'
-        });
+        if(error.status === -1){
+          var loginFailedAlert = $ionicPopup.alert({
+            title: 'Failed to signin',
+            template: 'Please check your internet connection'
+          });
+        }
+        if(error.status === 403){
+          var loginFailedAlert = $ionicPopup.alert({
+            title: 'Failed to signin',
+            template: 'Please check your username and password'
+          });
+        }
         $ionicLoading.hide();
       });
   }

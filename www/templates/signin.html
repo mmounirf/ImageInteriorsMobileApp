@@ -1,9 +1,8 @@
 <ion-view view-title="Sign In" hide-back-button="true" hide-nav-bar="true" class="signin-page">
-  <ion-content scroll="false">
+  <ion-content>
     <div class="signin-logo"></div>
 
     <div class="card">
-      <form name="signinForm">
       <label class="item item-input">
         <i class="icon ion-person"></i>
         <span class="input-label">Username</span>
@@ -16,6 +15,7 @@
       </label>
     </div>
 
+    <div class="form-actions">
     <button class="button button-large button-balanced button-balanced signin-btn" ng-click="signin(user)"  ng-disabled="signinForm.$invalid">
       Sign In
     </button>
@@ -23,6 +23,7 @@
     <button class="button button-large button-balanced signup-btn" ng-click="go_to('app.signup')">
       Sign Up
     </button>
+  </div>
   </form>
   </ion-content>
 </ion-view>

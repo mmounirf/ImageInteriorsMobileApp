@@ -558,6 +558,7 @@ justify-content: center;
     background-size: 85%;
     background-repeat: no-repeat;
     background-position: center center;
+    margin-top: 50px;
 }
 
 .signin-page .input-label, .signup-page .input-label {
@@ -573,13 +574,6 @@ justify-content: center;
 
 .signin-page i, .signup-page i{
     color: #588a9b;
-}
-
-.signin-page ion-content, .signup-page ion-content{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: stretch;
 }
 
 
@@ -607,8 +601,25 @@ justify-content: center;
 
 .back-btn{
   z-index: 10;
+	width: 100%;
+	background-color: #588a9b!important;
+	text-align: left;
 }
 
 .button-clear{
   color: #FFF!important;
+}
+
+.form-actions {
+    text-align: center;
+}
+
+.signin-page .scroll, .signup-page .scroll{
+	height: 90%;
+	position: absolute;
+	width: 100%;
+}
+
+.signin-page .input-label, .signup-page .input-label{
+	width: 90px!important;
 }

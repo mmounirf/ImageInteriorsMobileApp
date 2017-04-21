@@ -1,6 +1,6 @@
 <ion-view view-title="Sign Up" hide-back-button="true" hide-nav-bar="true" class="signup-page">
   <a class="button icon-left ion-chevron-left button-clear button-light back-btn" ng-href="#/app/signin">Sign In</a>
-  <ion-content scroll="false">
+  <ion-content>
     <div class="signin-logo"></div>
     <div class="card">
       <form name="registerForm" novalidate>
@@ -20,9 +20,11 @@
         <input ng-model="user.password" name="password" type="password" placeholder="Your password" required>
       </label>
     </div>
+    <div class="form-actions">
     <button class="button button-large button-balanced button-balanced signup-btn" ng-click="register(user)" ng-disabled="registerForm.$invalid">
       Complete Registeration
     </button>
+  </div>
   </form>
   </ion-content>
 </ion-view>
