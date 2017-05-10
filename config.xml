@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.mmounirf.imageinteriors" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>ImageInteriors</name>
+    <name>Image Interiors</name>
     <description>
         The ultimate resource for interiors.
     </description>
@@ -14,6 +14,13 @@
     <access launch-external="yes" origin="mailto:*" />
     <allow-intent href="geo:*" />
     <allow-intent href="tel:*" />
+
+    <access origin="http:*" launch-external="yes" />
+    <access origin="https:*" launch-external="yes" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+
+
     <preference name="webviewbounce" value="false" />
     <preference name="UIWebViewBounce" value="false" />
     <preference name="DisallowOverscroll" value="true" />

@@ -22,7 +22,7 @@
 			</div>
 			<h3 class="designer-name">{{designer.title.rendered}}</h3>
 			<div class="showroom-online">
-					<a class="button button-icon icon ion-ios-telephone" ng-href="mailto:{{designer.acf.phone}}" ng-if="designer.acf.phone"></a>
+					<a class="button button-icon icon ion-ios-telephone" ng-href="tel:{{designer.acf.phone}}" ng-if="designer.acf.phone"></a>
 					<a class="button button-icon icon ion-android-mail" ng-href="mailto:{{designer.acf.email}}" ng-if="designer.acf.email"></a>
 					<a class="button button-icon icon ion-earth" ng-click="openUrl(designer.acf.website)" ng-if="designer.acf.website"></a>
 					<a class="button button-icon icon ion-social-facebook" ng-click="openUrl(designer.acf.facebook)" ng-if="designer.acf.facebook"></a>
