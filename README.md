@@ -10,6 +10,5 @@
   - Envouges		[100% COMPLETED].
   - Favorites		[100% COMPLETED].
 
-# Todo
-  - Request hard copy from catalog, request form
-  - Change Google Maps API Key at production.
+# Current Version
+  - Production: V1
