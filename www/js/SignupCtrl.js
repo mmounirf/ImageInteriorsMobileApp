@@ -3,42 +3,66 @@ ImageInteriorsApp.controller('SignupCtrl', function($scope, $ionicLoading, $root
   $ionicHistory.nextViewOptions({
     disableBack: true
   });
+  
+
   $ionicSideMenuDelegate.canDragContent(false);
   $scope.togglePassword = function(){
     $scope.showPassword = !$scope.showPassword;
   }
-  var registerationApi = 'https://image-interiors.com/api/';
+  
+  
+  
+  var getNonce = 'http://image-interiors.com/api/get_nonce/?controller=user&method=register';
+  var registerationApi = 'http://image-interiors.com/api/user/register/?insecure=cool&';
+  
+  
   $scope.register = function(user) {
-
     $ionicLoading.show();
-    DataLoader.get(registerationApi+'get_nonce/?controller=user&method=register').then(function(response) {
-      $log.debug(response.data);
-      var nonce = response.data.nonce
-
-      DataLoader.get(registerationApi+"user/register/?username="+user.username+"&email="+user.email+"&nonce="+nonce+"&display_name="+user.username+"&user_pass="+user.password).then(function(response){
-        $log.debug(response.data)
-        $ionicLoading.hide();
-        var registerationCompleted = $ionicPopup.alert({
-          title: 'Registeration Completed',
-          template: 'Your account has been created, please signin now'
-        });
-        registerationCompleted.then(function(res) {
-            if(res) {
-               $scope.go_to('app.signin')
-             }
+	$http.get(getNonce).then(function(response) {
+		var nonce = response.data.nonce;
+		console.log(nonce);
+		$http.post(registerationApi+
+		"username="+user.username+
+		"&email="+user.email+
+		"&user_pass="+user.password+
+		"&display_name="+user.username+
+		"&nonce="+nonce,
+		"&notify=no"
+		).then(function(response){
+			console.log(response);
+			$ionicLoading.hide();
+			$ionicPopup.alert({
+				title: 'Registeration Completed',
+				template: 'Your account has been created, please signin now'
+			  });
+			 $scope.go_to('app.signin')
+			
+		}).catch(function(error){
+			console.log(error)
+			$ionicLoading.hide();
+			if(error.data.error=="Username already exists."){
+			$ionicPopup.alert({
+				title: 'Registeration Failed',
+				template: 'Username already exists.'
+			  });
+			}
+			
+			if(error.data.error=="E-mail address is already in use."){
+			$ionicPopup.alert({
+				title: 'Registeration Failed',
+				template: 'Email already exists.'
+			  });
+			}			
+		});
+		
+	}).catch( function(error) {
+		$ionicLoading.hide();
+		$ionicPopup.alert({
+            title: 'Registeration Failed',
+            template: 'Please check your internet connection'
           });
-      }, function(response){
-        $log.error(response)
-        $ionicLoading.hide();
-      })
-    }, function(response) {
-      $log.error(response);
-      var registerationFailed = $ionicPopup.alert({
-        title: 'Registeration Failed',
-        template: 'Please check your internet connection.'
-      });
-      $ionicLoading.hide();
-    });
+	});
+	
   };
 
 
