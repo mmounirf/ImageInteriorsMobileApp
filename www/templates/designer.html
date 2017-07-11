@@ -1,62 +1,68 @@
 <ion-view class="single_designer">
-	<ion-nav-title ng-bind-html="designer.title.rendered">
+  <ion-nav-title ng-bind-html="designer.title.rendered">
 
-	</ion-nav-title>
-	<ion-nav-buttons side="right">
-		<button class="button button-icon button-clear ion-android-share-alt" ng-click="socialShare(designer.title.rendered, designer.link)"></button>
-	</ion-nav-buttons>
+  </ion-nav-title>
+  <ion-nav-buttons side="right">
+    <button class="button button-icon button-clear ion-android-share-alt" ng-click="socialShare(designer.title.rendered, designer.link)"></button>
+  </ion-nav-buttons>
 
   <ion-content>
-  <ion-refresher on-refresh="doRefresh()"></ion-refresher>
-		<div class="designer-entry-wrapper">
-		<div class="designer-cover"
-					image-lazy-background-image="true"
-					image-lazy-src="{{designer.acf.cover_photo.url}}"
-					image-lazy-loader="{{os}}">
-		</div>
-		<div class="designer-pic-wrapper">
-			<div class="designer-pic"
-						image-lazy-background-image="true"
-						image-lazy-src="{{designer._embedded['wp:featuredmedia'][0].source_url}}"
-						image-lazy-loader="{{os}}">
-			</div>
-			<h3 class="designer-name">{{designer.title.rendered}}</h3>
-			<div class="showroom-online">
-					<a class="button button-icon icon ion-ios-telephone" ng-href="tel:{{designer.acf.phone}}" ng-if="designer.acf.phone"></a>
-					<a class="button button-icon icon ion-android-mail" ng-href="mailto:{{designer.acf.email}}" ng-if="designer.acf.email"></a>
-					<a class="button button-icon icon ion-earth" ng-click="openUrl(designer.acf.website)" ng-if="designer.acf.website"></a>
-					<a class="button button-icon icon ion-social-facebook" ng-click="openUrl(designer.acf.facebook)" ng-if="designer.acf.facebook"></a>
-					<a class="button button-icon icon ion-social-twitter" ng-click="openUrl(designer.acf.twitter)" ng-if="designer.acf.twitter"></a>
-					<a class="button button-icon icon ion-social-instagram" ng-click="openUrl(designer.acf.instagram)" ng-if="designer.acf.instagram"></a>
-					<a class="button button-icon icon ion-social-pinterest" ng-click="openUrl(designer.acf.pinterest)" ng-if="designer.acf.pinterest"></a>
-					<a class="button button-icon icon ion-social-linkedin" ng-click="openUrl(designer.acf.linkedin)" ng-if="designer.acf.linkedin"></a>
-			</div>
-		</div>
-	</div>
+    <ion-refresher on-refresh="doRefresh()"></ion-refresher>
+    <div class="designer-entry-wrapper">
+      <div class="designer-cover" image-lazy-background-image="true" image-lazy-src="{{designer.acf.cover_photo.url}}" image-lazy-loader="{{os}}">
+      </div>
+      <div class="designer-pic-wrapper">
+        <div class="designer-pic" image-lazy-background-image="true" image-lazy-src="{{designer._embedded['wp:featuredmedia'][0].source_url}}"
+          image-lazy-loader="{{os}}">
+        </div>
+      </div>
+      <div class="designer-info">
+        <h3 class="designer-name">{{designer.title.rendered}}</h3>
+        <p class="designer-bio" ng-if="!readmore">{{designer.acf.biography | limitTo: 170 }}{{designer.acf.biography > 170 ? '' : '...'}}</p>
+        <p class="designer-bio" ng-if="readmore">{{designer.acf.biography}}</p>
+        <button class="button button-full button-balanced" ng-click="readmore=!readmore" ng-show="!readmore">
+					 Read more
+				</button>
+        <button class="button button-full button-balanced" ng-click="readmore=!readmore" ng-show="readmore">
+					 Read less
+				</button>
+        <div class="showroom-online">
+          <a class="button button-icon icon ion-ios-telephone" ng-href="tel:{{designer.acf.phone}}" ng-if="designer.acf.phone"></a>
+          <a class="button button-icon icon ion-android-mail" ng-href="mailto:{{designer.acf.email}}" ng-if="designer.acf.email"></a>
+          <a class="button button-icon icon ion-earth" ng-click="openUrl(designer.acf.website)" ng-if="designer.acf.website"></a>
 
+          <a class="button button-icon icon ion-location" href="{{designer_address_url}}" ng-if="designer.acf.address"></a>
+          <a class="button button-icon icon ion-social-facebook" ng-click="openUrl(designer.acf.facebook)" ng-if="designer.acf.facebook"></a>
+          <a class="button button-icon icon ion-social-twitter" ng-click="openUrl(designer.acf.twitter)" ng-if="designer.acf.twitter"></a>
+          <a class="button button-icon icon ion-social-instagram" ng-click="openUrl(designer.acf.instagram)" ng-if="designer.acf.instagram"></a>
+          <a class="button button-icon icon ion-social-pinterest" ng-click="openUrl(designer.acf.pinterest)" ng-if="designer.acf.pinterest"></a>
+          <a class="button button-icon icon ion-social-linkedin" ng-click="openUrl(designer.acf.linkedin)" ng-if="designer.acf.linkedin"></a>
+        </div>
+      </div>
+    </div>
 
-		<div class="card">
-			<div class="item item-divider">
-				Gallery
-			</div>
+    <div class="designer-extra-info">
+      <div class="card">
+        <div class="item item-divider">
+          Gallery
+        </div>
 
-			<ion-slides slider="gallerySlider" class="gallerySlider">
-					<ion-slide-page ng-repeat="slide in designer.acf.gallery"
-													style="background:url({{slide.url}})">
-					</ion-slide-page>
-			</ion-slides>
-		</div>
+        <ion-slides slider="gallerySlider" class="gallerySlider">
+          <ion-slide-page ng-repeat="slide in designer.acf.gallery" style="background:url({{slide.url}})">
+          </ion-slide-page>
+        </ion-slides>
+      </div>
 
-		<div class="card" ng-if="relatedShowroom">
-			<div class="item item-divider">
-				Related Showroom
-			</div>
-			<a href="#/app/showrooms/{{relatedShowroom.id}}" class="related-showrom">
-				<div class="designer-related-showroom" style="background: url({{relatedShowroom._embedded['wp:featuredmedia'][0].source_url}})">
-				</div>
-			</a>
-		</div>
-
+      <div class="card" ng-if="relatedShowroom">
+        <div class="item item-divider">
+          Related Showroom
+        </div>
+        <a href="#/app/showrooms/{{relatedShowroom.id}}" class="related-showrom">
+          <div class="designer-related-showroom" style="background: url({{relatedShowroom._embedded['wp:featuredmedia'][0].source_url}})">
+          </div>
+        </a>
+      </div>
+    </div>
 
   </ion-content>
 </ion-view>
